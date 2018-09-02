@@ -6,3 +6,8 @@ print-collect-json:
 collect-json:
 	rm -rf jsonfiles
 	$(MAKE) print-collect-json | grep -v '^make' | bash -x
+
+codegen:
+	python _tools/codegen.py --disable-docstring jsonfiles/sheets/v4/sheets-api.json
+shape:
+	dictknife shape --with-type --with-example jsonfiles/sheets/v4/sheets-api.json| tee docs/sheets.shape
